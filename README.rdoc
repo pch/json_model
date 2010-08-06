@@ -1,6 +1,6 @@
 = json_model
 
-Description goes here.
+Description soon
 
 == Note on Patches/Pull Requests
  
@@ -14,4 +14,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 pchm. See LICENSE for details.
+Copyright (c) 2010 Piotr Chmolowski. See LICENSE for details.

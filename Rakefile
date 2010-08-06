@@ -5,12 +5,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "json_model"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "piotr.chmolowski@polcode.com"
-    gem.homepage = "http://github.com/volta/json_model"
-    gem.authors = ["pchm"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.summary = "ActiveRecord replacement for pure JSON models"
+    gem.description = "ActiveRecord replacement for pure JSON models"
+    gem.email = "piotr@chmolowski.pl"
+    gem.homepage = "http://github.com/pchm/json_model"
+    gem.authors = ["Piotr Chmolowski"]
+    # gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
