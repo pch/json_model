@@ -1,14 +1,4 @@
-require 'json_model/attributes'
-require 'json_model/attribute'
-require 'json_model/associations'
-
-require 'json_model/data_types/string'
-require 'json_model/data_types/integer'
-require 'json_model/data_types/boolean'
-require 'json_model/data_types/array'
-require 'json_model/data_types/timestamp'
-require 'json_model/data_types/bitfield'
-#require 'json_model/data_types/'
+Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/**/*.rb', &method(:require))
 
 #
 # Base class for JSON models.
@@ -65,5 +55,4 @@ module JsonModel
       attrs.each { |k, v| new_attrs[k.to_sym] = v }
       new_attrs
     end
-    
 end

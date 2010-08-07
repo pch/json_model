@@ -40,5 +40,22 @@ describe "Attributes" do
       person = Person.new(:asd => 1)
     }.should raise_error(StandardError)
   end
-  
+
+  it "should create new object with association and assigned attrs" do
+    person = Person.new :cars => [{'make' => 2010}]
+    person.cars.size.should eql(1)
+    person.cars[0].make.should eql('2010')
+  end
+
+  it "should raise an error when there is no matching association defined" do
+    lambda {
+      person = Person.new :carss => [{'make' => 1}]
+    }.should raise_error(StandardError)
+  end
+
+  it "should raise an error when there is no matching association's attribute" do
+    lambda {
+      person = Person.new :cars => [{'makes' => 1}]
+    }.should raise_error(StandardError)
+  end
 end
