@@ -1,10 +1,18 @@
-Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/**/*.rb', &method(:require))
+Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/data_types/core_ext/*.rb', &method(:require))
+require 'active_support/json'
 
 #
 # Base class for JSON models.
 #
 module JsonModel
-  
+  autoload :Attributes,   'json_model/attributes'
+  autoload :Attribute,    'json_model/attribute'
+  autoload :Associations, 'json_model/associations'
+
+  autoload :Bitfield,  'json_model/data_types/bitfield'
+  autoload :Boolean,   'json_model/data_types/boolean'
+  autoload :TimeStamp, 'json_model/data_types/timestamp'
+
   module Plugins
     def plugin(mod)
       extend  mod::ClassMethods    if mod.const_defined?(:ClassMethods)
