@@ -10,7 +10,7 @@ describe "Attributes" do
   end
   
   it "should load an integer" do
-    Integer.json_load(1).should eql(1)
+    Integer.json_load("1").should eql(1)
   end
   
   it "should dump an integer" do
@@ -35,27 +35,22 @@ describe "Attributes" do
     person.id.should eql(1)
   end
   
+  it "should load attributes if hash keys are strings" do
+    person = Person.new("id" => 1, "name" => "John Doe")
+    person.id.should   == 1
+    person.name.should == "John Doe"
+  end
+  
+  it "should allow for JsonModel classes as attributes" do
+    person = Person.new(:id => 1, :address => {:street => '5th Ave', :postal_code => '00-000'})
+    person.address.should be_an_instance_of(Address)
+    person.address.street.should      == '5th Ave'
+    person.address.postal_code.should == '00-000'
+  end
+  
   it "should raise an error when there is no matching attribute defined" do
     lambda {
       person = Person.new(:asd => 1)
-    }.should raise_error(StandardError)
-  end
-
-  it "should create new object with association and assigned attrs" do
-    person = Person.new :cars => [{'make' => 2010}]
-    person.cars.size.should eql(1)
-    person.cars[0].make.should eql('2010')
-  end
-
-  it "should raise an error when there is no matching association defined" do
-    lambda {
-      person = Person.new :carss => [{'make' => 1}]
-    }.should raise_error(StandardError)
-  end
-
-  it "should raise an error when there is no matching association's attribute" do
-    lambda {
-      person = Person.new :cars => [{'makes' => 1}]
     }.should raise_error(StandardError)
   end
 end

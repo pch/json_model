@@ -29,6 +29,14 @@ task :spec => :check_dependencies
 
 task :default => :spec
 
+desc "Run all examples with RCov"
+Spec::Rake::SpecTask.new('spec:rcov') do |t|
+  t.spec_opts  = ["-cfs"]
+  t.rcov = true
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.rcov_opts = ['--exclude spec,/home']
+end
+
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""

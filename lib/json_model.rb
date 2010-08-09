@@ -1,5 +1,6 @@
 Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/data_types/core_ext/*.rb', &method(:require))
-require 'active_support/json'
+require 'rubygems'
+require 'active_support'
 
 #
 # Base class for JSON models.
@@ -49,6 +50,7 @@ module JsonModel
     end
     
     # Loads serialized object from json string
+    # TODO: better name
     def from_json(json)
       attrs = ActiveSupport::JSON.decode(json)
       new(attrs)

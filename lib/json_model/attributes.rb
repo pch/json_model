@@ -16,14 +16,15 @@ module JsonModel
           
           attrs.delete(k)
         end
-
+        
         raise StandardError, "undefined attributes: #{attrs.inspect}" if (attrs.keys - self.class.associations.keys).size > 0
       end
       
       def dump_data
         attrs = {}
         self.class.attributes.each do |name, info|
-          attrs[name] = info[:class].json_dump(send(name))
+          value = send(name)
+          attrs[name] = info[:class].json_dump(value) unless value.nil?
         end
         attrs
       end
