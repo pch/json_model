@@ -1,10 +1,11 @@
-#Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/data_types/core_ext/*.rb', &method(:require))
-require 'json_model/data_types/core_ext/string'	
-require 'json_model/data_types/core_ext/integer'
-require 'json_model/data_types/core_ext/array'
-require 'json_model/data_types/timestamp'
-require 'json_model/data_types/bitfield'
-require 'json_model/data_types/boolean'
+Dir[File.join(File.dirname(__FILE__), 'json_model', 'data_types', 'core_ext', '*.rb')].each do |extension|
+  require extension
+end
+
+Dir[File.join(File.dirname(__FILE__), 'json_model', 'data_types', '*.rb')].each do |extension|
+  require extension
+end
+
 require 'active_support'
 
 #

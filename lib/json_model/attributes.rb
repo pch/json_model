@@ -17,7 +17,7 @@ module JsonModel
           attrs.delete(k)
         end
         
-        raise StandardError, "undefined attributes: #{attrs.inspect}" if (attrs.keys - self.class.associations.keys).size > 0
+        raise StandardError, "undefined attributes: #{attrs.inspect} for #{self.class}" if (attrs.keys - self.class.associations.keys).size > 0
       end
       
       def dump_data
