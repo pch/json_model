@@ -1,5 +1,10 @@
-Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/data_types/core_ext/*.rb', &method(:require))
-require 'rubygems'
+#Dir.glob(File.dirname(File.expand_path(__FILE__))+'/json_model/data_types/core_ext/*.rb', &method(:require))
+require 'json_model/data_types/core_ext/string'	
+require 'json_model/data_types/core_ext/integer'
+require 'json_model/data_types/core_ext/array'
+require 'json_model/data_types/timestamp'
+require 'json_model/data_types/bitfield'
+require 'json_model/data_types/boolean'
 require 'active_support'
 
 #
@@ -9,11 +14,7 @@ module JsonModel
   autoload :Attributes,   'json_model/attributes'
   autoload :Attribute,    'json_model/attribute'
   autoload :Associations, 'json_model/associations'
-
-  autoload :Bitfield,  'json_model/data_types/bitfield'
-  autoload :Boolean,   'json_model/data_types/boolean'
-  autoload :TimeStamp, 'json_model/data_types/timestamp'
-
+  
   module Plugins
     def plugin(mod)
       extend  mod::ClassMethods    if mod.const_defined?(:ClassMethods)
