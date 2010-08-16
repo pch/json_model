@@ -31,10 +31,23 @@ How to use it
 
       has_many :cars
       has_many :red_cars, :class => Car
+      
+      before_dump :scientologist_filter
+      after_load  :add_nobiliary_particle
+      
+      def scientolofist_filter
+        # One of the main principles of the Church of Scientology
+        # states that its members cannot be dumped to JSON
+        false if self.name == "Tom Cruise"
+      end
+      
+      def add_nobliary_particle
+        self.name = self.name.gsub(" ", " von ")
+      end
     end
     
     person = Person.new(:id => 1, :address => {:street => '5th Ave', :postal_code => '00-000'})
-    person.json_encode
+    person.to_json
 
 ### Note on Patches/Pull Requests
  
