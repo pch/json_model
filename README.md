@@ -35,7 +35,7 @@ How to use it
       before_dump :scientologist_filter
       after_load  :add_nobiliary_particle
       
-      def scientolofist_filter
+      def scientologist_filter
         # One of the main principles of the Church of Scientology
         # states that its members cannot be dumped to JSON
         false if self.name == "Tom Cruise"
