@@ -8,11 +8,11 @@ class Boolean
   }
   
   def self.json_load(value)
-    value
+    return value if MAPPING[value].nil?
+    MAPPING[value]
   end
   
   def self.json_dump(value)
-    return value if MAPPING[value].nil?
-    MAPPING[value]
+    value
   end
 end
