@@ -23,4 +23,21 @@ class Person
   
   has_many :cars
   has_many :red_cars, :class => Car
+  
+  before_dump :before_callback
+  before_dump :scientologist_filter
+  
+  after_load  :after_callback
+  
+  def before_callback
+    "before"
+  end
+  
+  def scientologist_filter
+    false if self.name == "Tom Cruise"
+  end
+  
+  def after_callback
+    self.name = self.name.gsub(" ", " von ") if self.name == "John Johnson"
+  end
 end

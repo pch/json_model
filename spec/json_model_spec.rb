@@ -10,7 +10,16 @@ describe "JsonModel" do
   
   it "should encode objects to JSON" do
     person = Person.new(:id => 1, :name => "John Doe", :address => {:street => '5th Ave'}, :cars => [{ :make => 'Audi', :model => 'A4' }])
-    person.json_encode.should == "{\"address\":{\"street\":\"5th Ave\"},\"cars\":[{\"model\":\"A4\",\"make\":\"Audi\"}],\"name\":\"John Doe\",\"red_cars\":[],\"id\":1}"
+    json   = person.to_json
+    
+    json.should match(/^\{.+\}$/)
+    json.should match(/\"name\":\"John Doe\"/)
+    json.should match(/\"id\":1/)
+    json.should match(/\"address\":\{\"street\":\"5th Ave\"\}/)
+    json.should match(/\"cars\":\[\{.+\}\]/)
+    json.should match(/\"model\":\"A4\"/)
+    json.should match(/\"make\":\"Audi\"/)
+    json.should match(/\"red_cars\":\[\]/)
   end
   
   it "should load objects from JSON" do

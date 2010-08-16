@@ -15,6 +15,7 @@ module JsonModel
   autoload :Attributes,   'json_model/attributes'
   autoload :Attribute,    'json_model/attribute'
   autoload :Associations, 'json_model/associations'
+  autoload :Callbacks,    'json_model/callbacks'
   
   module Plugins
     def plugin(mod)
@@ -30,6 +31,7 @@ module JsonModel
       
       plugin Attributes
       plugin Associations
+      plugin Callbacks
     end
   end
   
@@ -41,7 +43,7 @@ module JsonModel
     {}
   end
   
-  def json_encode
+  def to_json
     ActiveSupport::JSON.encode(dump_data)
   end
   

@@ -1,6 +1,6 @@
 class TimeStamp
   
-  def self.json_load(value)
+  def self.json_load(value)    
     value.to_i
   end
   
