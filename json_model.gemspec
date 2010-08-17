@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Piotr Chmolowski"]
-  s.date = %q{2010-08-16}
+  s.date = %q{2010-08-17}
   s.description = %q{ActiveRecord replacement for pure JSON models}
   s.email = %q{piotr@chmolowski.pl}
   s.extra_rdoc_files = [
@@ -41,7 +41,8 @@ Gem::Specification.new do |s|
      "spec/fixtures.rb",
      "spec/json_model_spec.rb",
      "spec/relationships_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "spec/timestamp_spec.rb"
   ]
   s.homepage = %q{http://github.com/pchm/json_model}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -55,7 +56,8 @@ Gem::Specification.new do |s|
      "spec/fixtures.rb",
      "spec/json_model_spec.rb",
      "spec/relationships_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "spec/timestamp_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

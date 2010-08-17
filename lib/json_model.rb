@@ -47,6 +47,10 @@ module JsonModel
     ActiveSupport::JSON.encode(dump_data)
   end
   
+  def persisted?  
+    false  
+  end
+  
   module ClassMethods
     
     def create(attrs = {})
