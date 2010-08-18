@@ -7,9 +7,11 @@ module JsonModel
       
       def initialize(attrs = {})
         super(attrs)
+        
         attrs = symbolize_keys(attrs)
         
         self.class.associations.each do |a, info|
+          send("#{a}=", [])
           next if !attrs.include?(a)
           
           if info[:class].nil?
@@ -19,7 +21,6 @@ module JsonModel
             klass = info[:class]
           end
           
-          send("#{a}=", [])
           attrs[a].each do |assoc|
             if assoc.is_a?(Array)
               assoc = assoc[1]
