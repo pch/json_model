@@ -61,7 +61,7 @@ How to use it
 
 ### Credits
 
-- Piotr Chmolowski (http://github.com/pch)
-- Oleg Keene (http://github.com/olkeene)
-- Grzegorz Kazulak (http://github.com/grzegorzkazulak)
+- Piotr Chmolowski (<http://github.com/pch>)
+- Oleg Keene (<http://github.com/olkeene>)
+- Grzegorz Kazulak (<http://github.com/grzegorzkazulak>)
 
