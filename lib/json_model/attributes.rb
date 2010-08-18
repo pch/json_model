@@ -6,18 +6,7 @@ module JsonModel
       
       def initialize(attrs = {})
         super(attrs)
-        attrs = symbolize_keys(attrs)
-        
-        self.class.attributes.each do |k, info|
-          next unless attrs.include?(k)
-          
-          value = info[:class].json_load(attrs[k])
-          send("#{k}=", value)
-          
-          attrs.delete(k)
-        end
-        
-        raise StandardError, "undefined attributes: #{attrs.inspect} for #{self.class}" if (attrs.keys - self.class.associations.keys).size > 0
+        load_attributes(attrs)
       end
       
       def dump_data
@@ -28,6 +17,32 @@ module JsonModel
         end
         attrs
       end
+      
+      def update_attributes(attrs)
+        load_attributes(attrs)
+      end
+      
+      private
+      
+        def load_attributes(attrs)
+          attrs = symbolize_keys(attrs)
+          
+          self.class.attributes.each do |attr_name, info|
+            next unless attrs.include?(attr_name)
+            
+            # TODO: make it less lame
+            old_value = send(attr_name)
+            if !old_value.nil? and old_value.respond_to?(:update_attributes)
+              old_value.update_attributes(attrs[attr_name])
+            else
+              value = info[:class].json_load(attrs[attr_name])
+              send("#{attr_name}=", value)
+            end
+
+            attrs.delete(attr_name)
+          end
+          raise StandardError, "undefined attributes: #{attrs.inspect} for #{self.class}" if (attrs.keys - self.class.associations.keys).size > 0
+        end
     end
     
     module ClassMethods
@@ -46,8 +61,12 @@ module JsonModel
         value.dump_data
       end
       
-      def json_load(value)
-        new(value)
+      def json_load(value, old_value = nil)
+        if old_value.nil?
+          new(value)
+        else
+          old_value.update_attributes(value)
+        end
       end
     end
   end

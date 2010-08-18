@@ -53,4 +53,21 @@ describe "Attributes" do
       person = Person.new(:asd => 1)
     }.should raise_error(StandardError)
   end
+  
+  it "should update given attributes" do
+    person = Person.new(:id => 1, :name => "John Doe")
+    person.update_attributes(:name => "Frank McDonald")
+    
+    person.id.should   == 1
+    person.name.should == "Frank McDonald"
+  end
+  
+  it "should update given attributes, including other JsonModel attributes" do
+    person = Person.new(:name => "John Doe", :address => {:street => '5th Ave', :postal_code => '00-000'})
+    person.update_attributes(:name => "Johnny Doe", :address => {:street => '7th Ave'})
+    
+    person.name.should == "Johnny Doe"
+    person.address.street.should      == "7th Ave"
+    person.address.postal_code.should == "00-000"
+  end
 end

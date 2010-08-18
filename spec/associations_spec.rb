@@ -33,4 +33,6 @@ describe "Associations" do
       person = Person.new :cars => [{'makes' => 1}]
     }.should raise_error(StandardError)
   end
+  
+  it "should update associations"
 end
