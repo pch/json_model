@@ -58,7 +58,6 @@ module JsonModel
     end
     
     # Loads serialized object from json string
-    # TODO: better name
     def from_json(json)
       attrs = ActiveSupport::JSON.decode(json)
       new(attrs)

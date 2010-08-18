@@ -49,7 +49,7 @@ How to use it
     person = Person.new(:id => 1, :address => {:street => '5th Ave', :postal_code => '00-000'})
     person.to_json
 
-### Note on Patches/Pull Requests
+## Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -59,6 +59,9 @@ How to use it
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-### Copyright
+### Credits
 
-Copyright (c) 2010 Piotr Chmolowski. See LICENSE for details.
+- Piotr Chmolowski (http://github.com/pch)
+- Oleg Keene (http://github.com/olkeene)
+- Grzegorz Kazulak (http://github.com/grzegorzkazulak)
+
