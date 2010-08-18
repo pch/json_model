@@ -61,12 +61,8 @@ module JsonModel
         value.dump_data
       end
       
-      def json_load(value, old_value = nil)
-        if old_value.nil?
-          new(value)
-        else
-          old_value.update_attributes(value)
-        end
+      def json_load(value)
+        new(value)
       end
     end
   end
