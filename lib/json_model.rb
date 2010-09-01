@@ -13,7 +13,6 @@ require 'active_support'
 #
 module JsonModel
   autoload :Attributes,   'json_model/attributes'
-  autoload :Attribute,    'json_model/attribute'
   autoload :Associations, 'json_model/associations'
   autoload :Callbacks,    'json_model/callbacks'
   
