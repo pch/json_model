@@ -63,8 +63,22 @@ Updating attributes:
 
     person.update_attributes(:name => "Henry", :address => {:street => '5th Ave', :postal_code => '00-000'})
 
+### Using JsonModel with Rails 3 validators and form helpers
 
+In order to ensure Rails 3 compatibility, you'll need to include some ActiveModel modules in your JsonModel classes:
 
+	class User
+	  include JsonModel
+	  include ActiveModel::Validations
+	  include ActiveModel::Conversion  
+	  extend  ActiveModel::Naming
+      
+      attribute :name,  String
+      attribute :email, String    
+
+      validates :name,  :presence => true
+      validates :email, :presence => true
+    end
 
 ## Note on Patches/Pull Requests
  
