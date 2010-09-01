@@ -1,10 +1,16 @@
-JSON Model for Rails
-====
+# JSON Model for Rails
 
 ActiveRecord replacement for pure JSON models.
 
-How to use it
--------------
+## Installation
+
+Put the following line in your Gemfile:
+
+	gem 'json_model', :git => 'git://github.com/pch/json_model.git'
+
+And run `bundle install` afterwards.
+
+# How to use it
 
     class Car
       include JsonModel
@@ -48,6 +54,17 @@ How to use it
     
     person = Person.new(:id => 1, :address => {:street => '5th Ave', :postal_code => '00-000'})
     person.to_json
+
+Loading objects from JSON:
+
+    person = Person.from_json(json_string)
+    
+Updating attributes:
+
+    person.update_attributes(:name => "Henry", :address => {:street => '5th Ave', :postal_code => '00-000'})
+
+
+
 
 ## Note on Patches/Pull Requests
  
