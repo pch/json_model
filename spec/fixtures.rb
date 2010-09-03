@@ -16,6 +16,7 @@ end
 
 class Person
   include JsonModel
+  include JsonModel::ValidationHelper
   
   attribute :name, String
   attribute :id, Integer

@@ -32,7 +32,6 @@ module JsonModel
       plugin Attributes
       plugin Associations
       plugin Callbacks
-      plugin ValidationHelper
     end
   end
   
