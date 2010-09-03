@@ -2,7 +2,6 @@ require 'active_support/inflector'
 
 module JsonModel
   module Associations
-    
     module InstanceMethods
       
       def initialize(attrs = {})
@@ -32,6 +31,9 @@ module JsonModel
         end
       end
       
+      # Converts the current object to a hash with attribute names as keys
+      # and the values of the attributes as values
+      #
       def dump_data
         attrs = super
         self.class.associations.each do |name, info|
@@ -49,7 +51,6 @@ module JsonModel
     end
     
     module ClassMethods
-      
       def associations
         @associations ||= {}
       end

@@ -1,5 +1,4 @@
 class Integer
-  
   def self.json_load(value)
     value.nil? || value == "" ? nil : value.to_i
   end

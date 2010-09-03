@@ -1,5 +1,4 @@
 class Array
-  
   def self.json_load(value)
     value
   end

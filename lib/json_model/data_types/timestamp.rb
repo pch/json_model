@@ -1,5 +1,4 @@
 class TimeStamp
-  
   def self.json_load(value)
     if value.to_s.match(/\d{4}-\d{2}-\d{2}/) # TODO
       value = DateTime.parse(value)

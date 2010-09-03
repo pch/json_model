@@ -1,3 +1,4 @@
+
 Dir[File.join(File.dirname(__FILE__), 'json_model', 'data_types', 'core_ext', '*.rb')].each do |extension|
   require extension
 end
@@ -8,25 +9,14 @@ end
 
 require 'active_support'
 
-#
-# Base class for JSON models.
-#
 module JsonModel
   autoload :Attributes,       'json_model/attributes'
   autoload :Associations,     'json_model/associations'
   autoload :Callbacks,        'json_model/callbacks'
   autoload :ValidationHelper, 'json_model/validation_helper'
   
-  module Plugins
-    def plugin(mod)
-      extend  mod::ClassMethods    if mod.const_defined?(:ClassMethods)
-      include mod::InstanceMethods if mod.const_defined?(:InstanceMethods)
-    end
-  end
-  
   def self.included(base)
     base.class_eval do
-      extend Plugins
       extend ClassMethods
       
       plugin Attributes
@@ -39,10 +29,12 @@ module JsonModel
     return unless attrs.is_a?(Hash)
   end
   
+  # See JsonModel::Attributes#dump_data
   def dump_data
     {}
   end
   
+  # Encodes the hash returned by dump_data to JSON
   def to_json
     ActiveSupport::JSON.encode(dump_data)
   end
@@ -52,6 +44,10 @@ module JsonModel
   end
     
   module ClassMethods
+    def plugin(mod)
+      extend  mod::ClassMethods    if mod.const_defined?(:ClassMethods)
+      include mod::InstanceMethods if mod.const_defined?(:InstanceMethods)
+    end
     
     def create(attrs = {})
       new(attrs)

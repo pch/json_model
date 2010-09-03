@@ -1,5 +1,4 @@
 class String
-  
   def self.json_load(value)
     value.to_s
   end

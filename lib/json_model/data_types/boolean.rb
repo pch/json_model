@@ -1,5 +1,4 @@
 class Boolean
-  
   MAPPING = {
     '1'     => true,
     'true'  => true,

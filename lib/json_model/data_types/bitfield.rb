@@ -1,5 +1,4 @@
 class Bitfield
-  
   def self.json_load(data)
     return data unless data.is_a?(Hash)
     

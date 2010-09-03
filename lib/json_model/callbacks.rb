@@ -1,7 +1,5 @@
 module JsonModel
-  
   module Callbacks
-    
     module InstanceMethods
       def to_json
         result = true
@@ -18,7 +16,6 @@ module JsonModel
     end
     
     module ClassMethods
-      
       def from_json(json)
         obj = super(json)
         
@@ -45,6 +42,5 @@ module JsonModel
         @after_dump_callbacks ||= []
       end
     end
-    
   end
 end

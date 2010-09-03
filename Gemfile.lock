@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_model (0.0.2)
+    json_model (0.0.3)
 
 GEM
   remote: http://rubygems.org/
