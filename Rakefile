@@ -1,33 +1,11 @@
-require 'rubygems'
-require 'rake'
+require "bundler"
+Bundler.setup
+
 require 'spec/rake/spectask'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "json_model"
-    gem.summary = "ActiveRecord replacement for pure JSON models"
-    gem.description = "ActiveRecord replacement for pure JSON models"
-    gem.email = "piotr@chmolowski.pl"
-    gem.homepage = "http://github.com/pchm/json_model"
-    gem.authors = ["Piotr Chmolowski"]
-    # gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
-end
-
-desc "Run all examples" 
 Spec::Rake::SpecTask.new('spec') do |t|
-  t.spec_opts  = ["-cfs"]
-  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts  = %w(-fs --color)
+  t.warning    = true
 end
-
-task :spec => :check_dependencies
-
-task :default => :spec
 
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new('spec:rcov') do |t|
@@ -45,4 +23,13 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "json_model #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+gemspec = eval(File.read("json_model.gemspec"))
+
+task :build => "#{gemspec.full_name}.gem"
+
+file "#{gemspec.full_name}.gem" => gemspec.files + ["json_model.gemspec"] do
+  system "gem build json_model.gemspec"
+  system "gem install json_model-#{JsonModel::VERSION}.gem"
 end
