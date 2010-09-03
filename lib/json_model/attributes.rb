@@ -30,7 +30,6 @@ module JsonModel
           self.class.attributes.each do |attr_name, info|
             next unless attrs.include?(attr_name)
             
-            # TODO: make it less lame
             old_value = send(attr_name)
             if !old_value.nil? and old_value.respond_to?(:update_attributes)
               old_value.update_attributes(attrs[attr_name])

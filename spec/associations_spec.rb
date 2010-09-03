@@ -34,5 +34,5 @@ describe "Associations" do
     }.should raise_error(StandardError)
   end
   
-  it "should update associations"
+  #it "should update associations"
 end

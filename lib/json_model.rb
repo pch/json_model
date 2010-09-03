@@ -12,9 +12,10 @@ require 'active_support'
 # Base class for JSON models.
 #
 module JsonModel
-  autoload :Attributes,   'json_model/attributes'
-  autoload :Associations, 'json_model/associations'
-  autoload :Callbacks,    'json_model/callbacks'
+  autoload :Attributes,       'json_model/attributes'
+  autoload :Associations,     'json_model/associations'
+  autoload :Callbacks,        'json_model/callbacks'
+  autoload :ValidationHelper, 'json_model/validation_helper'
   
   module Plugins
     def plugin(mod)
@@ -31,6 +32,7 @@ module JsonModel
       plugin Attributes
       plugin Associations
       plugin Callbacks
+      plugin ValidationHelper
     end
   end
   
@@ -49,7 +51,7 @@ module JsonModel
   def persisted?  
     false  
   end
-  
+    
   module ClassMethods
     
     def create(attrs = {})

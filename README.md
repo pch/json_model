@@ -10,7 +10,7 @@ Put the following line in your Gemfile:
 
 And run `bundle install` afterwards.
 
-# How to use it
+## Usage
 
     class Car
       include JsonModel
@@ -68,11 +68,11 @@ Updating attributes:
 In order to ensure Rails 3 compatibility, you'll need to include some ActiveModel modules in your JsonModel classes:
 
 	class User
-	  include JsonModel
 	  include ActiveModel::Validations
 	  include ActiveModel::Conversion  
 	  extend  ActiveModel::Naming
-      
+      include JsonModel      
+
       attribute :name,  String
       attribute :email, String    
 
