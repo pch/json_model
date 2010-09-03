@@ -71,7 +71,8 @@ In order to ensure Rails 3 compatibility, you'll need to include some ActiveMode
 	  include ActiveModel::Validations
 	  include ActiveModel::Conversion  
 	  extend  ActiveModel::Naming
-      include JsonModel      
+      include JsonModel
+      include JsonModel::ValidationHelper
 
       attribute :name,  String
       attribute :email, String    
