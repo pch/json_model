@@ -45,8 +45,8 @@ module JsonModel
     
   module ClassMethods
     def plugin(mod)
-      extend  mod::ClassMethods    if mod.const_defined?(:ClassMethods)
-      include mod::InstanceMethods if mod.const_defined?(:InstanceMethods)
+      include mod
+      extend  mod::ClassMethods if mod.const_defined?(:ClassMethods)
     end
     
     def create(attrs = {})

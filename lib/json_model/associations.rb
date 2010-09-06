@@ -2,52 +2,49 @@ require 'active_support/inflector'
 
 module JsonModel
   module Associations
-    module InstanceMethods
+    def initialize(attrs = {})
+      super(attrs)
       
-      def initialize(attrs = {})
-        super(attrs)
+      attrs = symbolize_keys(attrs)
+      
+      self.class.associations.each do |a, info|
+        send("#{a}=", [])
+        next if !attrs.include?(a)
         
-        attrs = symbolize_keys(attrs)
+        if info[:class].nil?
+          klass = ActiveSupport::Inflector.classify(a)
+          klass = ActiveSupport::Inflector.constantize(klass)
+        else
+          klass = info[:class]
+        end
         
-        self.class.associations.each do |a, info|
-          send("#{a}=", [])
-          next if !attrs.include?(a)
-          
-          if info[:class].nil?
-            klass = ActiveSupport::Inflector.classify(a)
-            klass = ActiveSupport::Inflector.constantize(klass)
-          else
-            klass = info[:class]
+        attrs[a].each do |assoc|
+          if assoc.is_a?(Array)
+            assoc = assoc[1]
           end
           
-          attrs[a].each do |assoc|
-            if assoc.is_a?(Array)
-              assoc = assoc[1]
-            end
-            
-            attrib = send(a)
-            attrib.push(klass.new(assoc))
-          end
+          attrib = send(a)
+          attrib.push(klass.new(assoc))
         end
       end
-      
-      # Converts the current object to a hash with attribute names as keys
-      # and the values of the attributes as values
-      #
-      def dump_data
-        attrs = super
-        self.class.associations.each do |name, info|
-          attrs[name] = []
-          
-          arr = send(name)
-          next if arr.nil?
-          
-          arr.each do |object|
-            attrs[name].push(object.dump_data) unless object.nil?
-          end
+    end
+    
+    # Converts the current object to a hash with attribute names as keys
+    # and the values of the attributes as values
+    #
+    def dump_data
+      attrs = super
+      self.class.associations.each do |name, info|
+        attrs[name] = []
+        
+        arr = send(name)
+        next if arr.nil?
+        
+        arr.each do |object|
+          attrs[name].push(object.dump_data) unless object.nil?
         end
-        attrs
       end
+      attrs
     end
     
     module ClassMethods

@@ -1,17 +1,15 @@
 module JsonModel
   module Callbacks
-    module InstanceMethods
-      def to_json
-        result = true
-        self.class.before_dump_callbacks.each do |method|
-          result = send(method)
-        end
+    def to_json
+      result = true
+      self.class.before_dump_callbacks.each do |method|
+        result = send(method)
+      end
 
-        if result === false
-          false
-        else
-          super
-        end
+      if result === false
+        false
+      else
+        super
       end
     end
     

@@ -10,7 +10,7 @@ describe "Associations" do
   
   it "should allow for association names different than the class name" do
     person = Person.new(:red_cars => [{:make => 'Subaru'}])
-    person.red_cars.size.should    == 1
+    person.red_cars.size.should == 1
     person.red_cars[0].should be_an_instance_of(Car)
     person.red_cars[0].make.should == "Subaru"
   end
