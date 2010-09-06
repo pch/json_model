@@ -31,4 +31,8 @@ describe "JsonModel" do
     person.cars[0].make.should      == 'Audi'
     person.cars[0].model.should     == 'A4'
   end
+  
+  it "should raise error if an invalid constructor param is provided" do
+    lambda { Person.new("error") }.should raise_error(StandardError)
+  end
 end

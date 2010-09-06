@@ -26,7 +26,7 @@ module JsonModel
   end
   
   def initialize(attrs = {})
-    return unless attrs.is_a?(Hash)
+    raise StandardError, "invalid attributes hash" unless attrs.is_a?(Hash)
   end
   
   # See JsonModel::Attributes#dump_data
