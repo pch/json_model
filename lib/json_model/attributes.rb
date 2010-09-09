@@ -10,7 +10,7 @@ module JsonModel
     #
     # The method calls json_dump of each attribute class.
     #
-    def dump_data
+    def as_json
       attrs = {}
       self.class.attributes.each do |name, info|
         value = send(name)
@@ -61,7 +61,7 @@ module JsonModel
       end
       
       def json_dump(value)
-        value.dump_data
+        value.as_json
       end
       
       def json_load(value)

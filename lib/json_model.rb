@@ -29,14 +29,14 @@ module JsonModel
     raise StandardError, "invalid attributes hash" unless attrs.is_a?(Hash)
   end
   
-  # See JsonModel::Attributes#dump_data
-  def dump_data
+  # See JsonModel::Attributes#as_json
+  def as_json
     {}
   end
   
-  # Encodes the hash returned by dump_data to JSON
+  # Encodes the hash returned by as_json to JSON
   def to_json
-    ActiveSupport::JSON.encode(dump_data)
+    ActiveSupport::JSON.encode(as_json)
   end
   
   def persisted?  

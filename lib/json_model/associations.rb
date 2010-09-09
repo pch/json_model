@@ -32,7 +32,7 @@ module JsonModel
     # Converts the current object to a hash with attribute names as keys
     # and the values of the attributes as values
     #
-    def dump_data
+    def as_json
       attrs = super
       self.class.associations.each do |name, info|
         attrs[name] = []
@@ -41,7 +41,7 @@ module JsonModel
         next if arr.nil?
         
         arr.each do |object|
-          attrs[name].push(object.dump_data) unless object.nil?
+          attrs[name].push(object.as_json) unless object.nil?
         end
       end
       attrs
