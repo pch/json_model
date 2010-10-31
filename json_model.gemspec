@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = ">= 1.3.6"
 
+  s.add_dependency "activemodel", "~> 3.0.0"
+
   s.files        = Dir["{lib}/**/*.rb", "LICENSE", "*.md"]
   s.require_path = 'lib'
 end
