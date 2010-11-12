@@ -11,5 +11,18 @@ module JsonModel
 
       self_valid && attr_valid
     end
+
+    def all_errors
+      errors = self.errors.to_hash
+
+      self.class.attributes.keys.each do |name|
+        attribute    = send(name)
+        if !errors.has_key?(name) && attribute.respond_to?(:errors)
+          errors[name] = attribute.errors
+        end
+      end
+
+      errors
+    end
   end
 end

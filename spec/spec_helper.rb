@@ -1,3 +1,7 @@
 $:.push File.join(File.dirname(__FILE__), '..', 'lib')
-require 'json_model'
+require "bundler"
+Bundler.setup
+
+require "json_model"
+require "active_model"
 require File.dirname(__FILE__) + '/fixtures.rb'
