@@ -6,7 +6,7 @@ ActiveRecord replacement for pure JSON models.
 
 Put the following line in your Gemfile:
 
-	gem 'json_model', :git => 'git://github.com/pch/json_model.git'
+  gem 'json_model', :git => 'git://github.com/pch/json_model.git'
 
 And run `bundle install` afterwards.
 
@@ -15,7 +15,7 @@ And run `bundle install` afterwards.
     class Car
       include JsonModel
 
-      attribute :make,  String
+      attribute :make,  String, :default => "Audi"
       attribute :model, String
       attribute :color, String
       attribute :bought_on, TimeStamp
@@ -33,32 +33,32 @@ And run `bundle install` afterwards.
 
       attribute :name, String
       attribute :id, Integer
-      attribute :address, Address
+      attribute :address, Address, :default => Address.new
 
       has_many :cars
       has_many :red_cars, :class => Car
-      
+
       before_dump :scientologist_filter
       after_load  :add_nobiliary_particle
-      
+
       def scientologist_filter
         # One of the main principles of the Church of Scientology
         # states that its members cannot be dumped to JSON
         false if self.name == "Tom Cruise"
       end
-      
+
       def add_nobliary_particle
         self.name = self.name.gsub(" ", " von ")
       end
     end
-    
+
     person = Person.new(:id => 1, :address => {:street => '5th Ave', :postal_code => '00-000'})
     person.to_json
 
 Loading objects from JSON:
 
     person = Person.from_json(json_string)
-    
+
 Updating attributes:
 
     person.update_attributes(:name => "Henry", :address => {:street => '5th Ave', :postal_code => '00-000'})
@@ -67,22 +67,22 @@ Updating attributes:
 
 In order to ensure Rails 3 compatibility, you'll need to include some ActiveModel modules in your JsonModel classes:
 
-	class User
-	  include ActiveModel::Validations
-	  include ActiveModel::Conversion  
-	  extend  ActiveModel::Naming
+  class User
+    include ActiveModel::Validations
+    include ActiveModel::Conversion
+    extend  ActiveModel::Naming
       include JsonModel
       include JsonModel::ValidationHelper
 
       attribute :name,  String
-      attribute :email, String    
+      attribute :email, String
 
       validates :name,  :presence => true
       validates :email, :presence => true
     end
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
