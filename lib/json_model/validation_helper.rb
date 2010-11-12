@@ -17,8 +17,8 @@ module JsonModel
 
       self.class.attributes.keys.each do |name|
         attribute    = send(name)
-        if !errors.has_key?(name) && attribute.respond_to?(:errors)
-          errors[name] = attribute.errors
+        if !errors.has_key?(name) && attribute.respond_to?(:all_errors)
+          errors[name] = attribute.all_errors
         end
       end
 
