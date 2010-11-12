@@ -24,9 +24,9 @@ class Person
   include JsonModel
   include JsonModel::ValidationHelper
 
-  attribute :name, String
+  attribute :name, String, :default => "Henry Johnson"
   attribute :id, Integer
-  attribute :address, Address
+  attribute :address, Address, :default => Address.new
 
   has_many :cars
   has_many :red_cars, :class => Car

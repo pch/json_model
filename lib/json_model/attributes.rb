@@ -33,14 +33,14 @@ module JsonModel
         attrs = symbolize_keys(attrs)
 
         self.class.attributes.each do |attr_name, info|
-          next unless attrs.include?(attr_name)
+          next if !attrs.include?(attr_name) && info[:default].nil?
 
           current_value = send(attr_name)
 
-          if !current_value.nil? && current_value.respond_to?(:update_attributes)
+          if !current_value.nil? && current_value.respond_to?(:update_attributes) && attrs.include?(attr_name)
             current_value.update_attributes(attrs[attr_name])
           else
-            value = info[:class].json_load(attrs[attr_name])
+            value = attrs.include?(attr_name) ? info[:class].json_load(attrs[attr_name]) : info[:default]
             send("#{attr_name}=", value)
           end
 
@@ -54,8 +54,9 @@ module JsonModel
 
     module ClassMethods
 
-      def attribute(name, klass)
-        attributes.store(name, {:class => klass})
+      def attribute(name, klass, options = {})
+        options[:class] = klass
+        attributes.store(name, options)
         self.send(:attr_accessor, name)
       end
 
