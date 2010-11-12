@@ -76,4 +76,10 @@ describe "Attributes" do
     person.name.should == "Henry Johnson"
     person.address.should be_an_instance_of(Address)
   end
+
+  it "should handle a namespaced model" do
+    person = Ugly::Person.new
+    person.name.should == "Joe Johnson"
+    person.address.should be_an_instance_of(Ugly::EffinAddress)
+  end
 end

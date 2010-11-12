@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Associations" do
 
   it "should create new object with association and assigned attrs" do
-    person = Person.new :cars => [{'make' => 2010}]
+    person = Person.new(:cars => [{'make' => 2010}])
     person.cars.size.should eql(1)
     person.cars[0].make.should eql('2010')
   end
@@ -32,5 +32,10 @@ describe "Associations" do
     lambda {
       person = Person.new :cars => [{'makes' => 1}]
     }.should raise_error(StandardError)
+  end
+
+  it "should handle a namespaced associations" do
+    person = Ugly::Person.new(:effin_cars => [{'make' => 2010}])
+    person.effin_cars.size.should == 1
   end
 end

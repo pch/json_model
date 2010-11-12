@@ -48,3 +48,33 @@ class Person
     self.name = self.name.gsub(" ", " von ") if self.name == "John Johnson"
   end
 end
+
+
+module Ugly
+  class EffinCar
+    include JsonModel
+
+    attribute :make,  String
+    attribute :model, String
+    attribute :color, String
+    attribute :bought_on, TimeStamp
+  end
+
+  class EffinAddress
+    include JsonModel
+
+    attribute :street, String
+    attribute :postal_code, String
+  end
+
+  class Person
+    include JsonModel
+
+    attribute :name, String, :default => "Joe Johnson"
+    attribute :id, Integer
+    attribute :address, EffinAddress, :default => EffinAddress.new
+
+    has_many :effin_cars
+  end
+end
+
