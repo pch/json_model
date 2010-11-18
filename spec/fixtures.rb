@@ -34,6 +34,8 @@ class Person
   before_dump :before_callback
   before_dump :scientologist_filter
 
+  validates :name, :presence => true
+
   after_load  :after_callback
 
   def before_callback

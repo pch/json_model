@@ -7,6 +7,12 @@ describe "JsonModel::ValidationHelper" do
     person.respond_to?(:valid?).should be_true
   end
 
+  it "should validate model" do
+    person = Person.create(:id => 1, :name => "")
+    person.cars << Car.new
+    person.valid?.should be_false
+  end
+
   it "should return all errors" do
     person = Person.create(:id => 2, :name => "John Doe")
     person.address = Address.new
