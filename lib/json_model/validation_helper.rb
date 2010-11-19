@@ -33,10 +33,9 @@ module JsonModel
         assoc_errors = []
         objects      = send(name)
 
-        i = 0
         objects.each do |obj|
           if obj.respond_to?(:all_errors)
-            assoc_errors[i][name] = obj.all_errors
+            assoc_errors.push(obj.all_errors)
           end
         end
 
