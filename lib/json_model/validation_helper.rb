@@ -6,13 +6,13 @@ module JsonModel
 
       self.class.attributes.each do |name, info|
         attribute  = send(name)
-        attr_valid = attribute.valid? if attribute.respond_to?(:valid?)
+        attr_valid = attr_valid && attribute.valid? if attribute.respond_to?(:valid?)
       end
 
       self.class.associations.each do |name, info|
         objects = send(name)
         objects.each do |obj|
-          attr_valid = obj.valid? if obj.respond_to?(:valid?)
+          attr_valid = attr_valid && obj.valid? if obj.respond_to?(:valid?)
         end
       end
 
